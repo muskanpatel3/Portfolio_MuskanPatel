@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muskan Patel · Full‑Stack Developer</title>
+    <!-- Fonts & icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Poppins:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Tailwind (lightweight) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F7FAFC;
+            color: #1A202C;
+            scroll-behavior: smooth;
+        }
+
+        h1,
+        h2,
+        h3,
+        .heading-font {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #6B46C1, #3182CE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-hover {
+            transition: all 0.25s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -10px rgba(107, 70, 193, 0.2);
+        }
+
+        .timeline-dot {
+            width: 14px;
+            height: 14px;
+            background: #6B46C1;
+            border-radius: 50%;
+            position: absolute;
+            left: -7px;
+            top: 6px;
+            border: 2px solid white;
+        }
+
+        .nav-glass {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(203, 213, 224, 0.3);
+        }
+
+        .mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .hidden-menu {
+            transform: translateX(100%);
+        }
+
+        #back-to-top {
+            display: none;
+        }
+
+        .animate-fade {
+            animation: fadeUp 0.7s ease forwards;
+        }
+
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn-primary {
+            background: #6B46C1;
+            color: white;
+            font-weight: 600;
+            padding: 0.7rem 1.8rem;
+            border-radius: 40px;
+            transition: all 0.2s;
+            box-shadow: 0 6px 14px rgba(107, 70, 193, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: #553C9A;
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px rgba(107, 70, 193, 0.35);
+        }
+
+        .btn-outline {
+            border: 1.5px solid #6B46C1;
+            color: #6B46C1;
+            font-weight: 600;
+            padding: 0.7rem 1.8rem;
+            border-radius: 40px;
+            transition: 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: #6B46C1;
+            color: white;
+        }
+
+        .skill-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+            border: 1px solid #edf2f7;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #6B46C1, #3182CE);
+            border-radius: 4px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+            transition: 0.25s ease;
+            border: 1px solid #f0f4f9;
+        }
+
+        .project-card:hover {
+            border-color: #d9c9ff;
+        }
+
+        .contact-buttons {
+            margin-top: 20px;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- FIXED NAVIGATION (glass) -->
+    <nav class="nav-glass fixed w-full z-50 py-3 px-4 md:px-8 flex items-center justify-between">
+        <span class="text-2xl font-bold heading-font gradient-text">Muskan Patel</span>
+
+        <!-- desktop menu -->
+        <div class="hidden md:flex items-center space-x-8 text-[15px] font-medium">
+            <a href="#home" class="hover:text-purple-700 transition">Home</a>
+            <a href="#skills" class="hover:text-purple-700 transition">Skills</a>
+            <a href="#experience" class="hover:text-purple-700 transition">Experience</a>
+            <a href="#projects" class="hover:text-purple-700 transition">Projects</a>
+            <a href="#education" class="hover:text-purple-700 transition">Education</a>
+            <a href="#contact" class="hover:text-purple-700 transition">Contact</a>
+            <a href="resumeMP.pdf" download="Muskan_Patel_Resume.pdf"
+                class="bg-purple-700 text-white px-5 py-2 rounded-full text-sm flex items-center gap-2 hover:bg-purple-800 transition">
+                <i data-lucide="download" class="w-4 h-4"></i> Resume
+            </a>
+        </div>
+
+        <!-- mobile toggle -->
+        <button id="menu-toggle" class="md:hidden text-gray-700 p-2">
+            <i data-lucide="menu" class="w-7 h-7"></i>
+        </button>
+    </nav>
+
+    <!-- MOBILE SIDEBAR -->
+    <div id="mobileSidebar" class="fixed inset-0 bg-white z-[100] mobile-menu hidden-menu flex flex-col p-8 md:hidden">
+        <div class="flex justify-between items-center mb-10">
+            <span class="text-2xl font-bold gradient-text">Menu</span>
+            <button id="close-menu"><i data-lucide="x" class="w-8 h-8 text-gray-600"></i></button>
+        </div>
+        <div class="flex flex-col space-y-6 text-xl">
+            <a href="#home" class="mobile-link">Home</a>
+            <a href="#skills" class="mobile-link">Skills</a>
+            <a href="#experience" class="mobile-link">Experience</a>
+            <a href="#projects" class="mobile-link">Projects</a>
+            <a href="#education" class="mobile-link">Education</a>
+            <a href="#contact" class="mobile-link">Contact</a>
+            <a href="resumeMP.pdf" download="Muskan_Patel_Resume.pdf"
+                class="bg-purple-700 text-white px-6 py-4 rounded-xl flex justify-center items-center gap-2 text-base mt-4">
+                <i data-lucide="download"></i> Download Resume
+            </a>
+        </div>
+    </div>
+
+    <main class="pt-20">
+
+        <!-- HERO SECTION (with profile image, clickable links) -->
+        <section id="home"
+            class="max-w-7xl mx-auto px-4 py-12 mr-5 md:py-20 flex flex-col md:flex-row items-center gap-12">
+            <div class="w-56 h-56 md:w-80 md:h-80 relative flex-shrink-0 animate-fade">
+                <div class="absolute inset-0 bg-purple-200 rounded-full blur-3xl opacity-30"></div>
+                <!-- circular profile image (placeholder) REPLACE WITH YOUR IMAGE -->
+                <img src="muskan.jpg" alt="Muskan Patel"
+                    class="w-full h-full object-cover rounded-full border-4 border-white shadow-xl relative z-10">
+            </div>
+            <div class="text-center md:text-left animate-fade" style="animation-delay:0.1s">
+                <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-3">Muskan Patel</h1>
+                <h2 class="text-xl md:text-2xl text-blue-600 font-semibold mb-4">MCA Student & Full‑Stack Developer
+                    (MERN)</h2>
+                <p class="text-gray-600 max-w-xl mb-6 text-lg">Building scalable applications · Problem solver ·
+                    Research oriented</p>
+                <!-- clickable contacts grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mb-6">
+                    <a href="tel:+919302580044"
+                        class="flex items-center gap-3 text-gray-700 hover:text-purple-700 transition">
+                        <i data-lucide="phone" class="w-5 h-5 text-purple-600"></i> +91-9302580044
+                    </a>
+                    <a href="mailto:muskanpatel03032003@gmail.com"
+                        class="flex items-center gap-3 text-gray-700 hover:text-purple-700 transition">
+                        <i class="fas fa-envelope text-purple-700"></i> muskanpatel03032003@gmail.com
+                    </a>
+                    <a href="https://linkedin.com/in/muskanpatel3" target="_blank"
+                        class="flex items-center gap-3 text-gray-700 hover:text-purple-700 transition">
+                        <i data-lucide="linkedin" class="w-5 h-5 text-blue-600"></i> linkedin.com/in/muskanpatel3
+                    </a>
+                    <a href="https://github.com/muskanpatel3" target="_blank"
+                        class="flex items-center gap-3 text-gray-700 hover:text-purple-700 transition">
+                        <i data-lucide="github" class="w-5 h-5 text-gray-800"></i> github.com/muskanpatel3
+                    </a>
+                </div>
+                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                    <a href="#projects" class="btn-primary inline-flex items-center gap-2"><i data-lucide="code"
+                            class="w-5 h-5"></i> Projects</a>
+                    <a href="resumeMP.pdf" download="Muskan_Patel_Resume.pdf"
+                        class="btn-outline inline-flex items-center gap-2">
+                        <i data-lucide="file-text" class="w-5 h-5"></i>
+                        Download Resume
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFESSIONAL SUMMARY (card style) -->
+        <section class="max-w-5xl mx-auto px-4 py-8">
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+                <h3 class="text-2xl font-bold mb-3 flex items-center gap-2 text-purple-800"><i data-lucide="user"
+                        class="w-6 h-6"></i>Professional Summary</h3>
+                <p class="text-gray-700 leading-relaxed text-lg">Motivated MCA student seeking a Software Developer or
+                    IT Support Engineer role. Skilled in the MERN stack, Java, and Python with strong ability to build
+                    scalable applications, optimize systems, and contribute to research-oriented solutions.</p>
+            </div>
+        </section>
+
+        <!-- SKILLS section (cards with icons) -->
+        <section id="skills" class="max-w-7xl mx-auto px-4 py-16">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="skill-card card-hover">
+                    <div
+                        class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center text-purple-700 mb-4">
+                        <i data-lucide="code-2"></i>
+                    </div>
+                    <h3 class="font-bold text-xl">Frontend</h3>
+                    <p class="text-gray-600">React.js, Material‑UI, Bootstrap, JS, HTML5, CSS3</p>
+                </div>
+                <div class="skill-card card-hover">
+                    <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center text-blue-700 mb-4"><i
+                            data-lucide="server"></i></div>
+                    <h3 class="font-bold text-xl">Backend & APIs</h3>
+                    <p class="text-gray-600">Node.js, Express, REST, MVC, JWT, Django (familiar), Flask, FastAPI</p>
+                </div>
+                <div class="skill-card card-hover">
+                    <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center text-green-700 mb-4">
+                        <i data-lucide="database"></i>
+                    </div>
+                    <h3 class="font-bold text-xl">Databases</h3>
+                    <p class="text-gray-600">MySQL, MongoDB, PostgreSQL, MongoDB Atlas, data modeling</p>
+                </div>
+                <div class="skill-card card-hover">
+                    <div
+                        class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600 mb-4">
+                        <i data-lucide="cloud"></i>
+                    </div>
+                    <h3 class="font-bold text-xl">Cloud & Deployment</h3>
+                    <p class="text-gray-600">AWS S3, DynamoDB (basics), Render, Vercel, Cloudinary</p>
+                </div>
+                <div class="skill-card card-hover">
+                    <div class="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-4"><i
+                            data-lucide="git-branch"></i></div>
+                    <h3 class="font-bold text-xl">Dev Tools</h3>
+                    <p class="text-gray-600">Git, GitHub, VS Code, Chrome DevTools, Jest</p>
+                </div>
+                <div class="skill-card card-hover">
+                    <div
+                        class="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-700 mb-4">
+                        <i data-lucide="network"></i>
+                    </div>
+                    <h3 class="font-bold text-xl">OS & Networking</h3>
+                    <p class="text-gray-600">Linux, Windows, TCP/IP, HTTP/HTTPS, security concepts</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE timeline -->
+        <section id="experience" class="bg-gray-50 py-16 px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="section-title">Work Experience</h2>
+                <div class="space-y-12">
+                    <div class="relative pl-8 border-l-2 border-purple-300 ml-2">
+                        <div class="timeline-dot"></div>
+                        <div class="flex flex-wrap items-center gap-3 mb-1">
+                            <h3 class="text-xl font-bold">Full‑Stack Developer – NestAway</h3><span
+                                class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Jan 2025 – May
+                                2025</span>
+                        </div>
+                        <p class="text-blue-700 font-medium mb-2">X2 InfoTech</p>
+                        <ul class="list-disc list-outside text-gray-600 ml-5 space-y-1">
+                            <li>MERN stack rental platform, JWT auth, Cloudinary, MVC architecture.</li>
+                            <li>Optimized React components → 25% faster page load, 150+ test interactions.</li>
+                            <li>REST APIs, MongoDB Atlas, deployed on Render with 99% uptime.</li>
+                        </ul>
+                    </div>
+                    <div class="relative pl-8 border-l-2 border-purple-300 ml-2">
+                        <div class="timeline-dot"></div>
+                        <div class="flex flex-wrap items-center gap-3 mb-1">
+                            <h3 class="text-xl font-bold">Credit EDA Project – Intern</h3><span
+                                class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Jan 2024 – May
+                                2024</span>
+                        </div>
+                        <p class="text-blue-700 font-medium mb-2">IIT Roorkee</p>
+                        <ul class="list-disc list-outside text-gray-600 ml-5 space-y-1">
+                            <li>Analyzed credit datasets using Python (Pandas, Matplotlib, Seaborn).</li>
+                            <li>Identified 10+ risk factors improving credit approval accuracy by 18%.</li>
+                            <li>Presented data-driven insights for business optimization.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS cards (with hover, demo & github mock) -->
+
+        <section id="projects" class="max-w-7xl mx-auto px-4 py-16">
+            <h2 class="section-title">Featured Projects</h2>
+
+            <!-- 3 cards in one row on desktop, 1 on mobile -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Zerodha Clone - Card 1 -->
+                <div class="project-card group h-full flex flex-col">
+                    <div class="h-36 bg-gradient-to-r from-purple-500 to-blue-600 flex items-center justify-center">
+                        <i data-lucide="trending-up" class="w-12 h-12 text-white opacity-80"></i>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start gap-2">
+                            <h3 class="text-xl font-bold">Zerodha Clone</h3>
+                            <span
+                                class="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full whitespace-nowrap">Jan
+                                2026</span>
+                        </div>
+                        <p class="text-gray-600 my-3 text-sm">MERN trading platform with real‑time stock charts, JWT,
+                            portfolio P&L, 25% faster API response.</p>
+                        <div class="flex flex-wrap gap-1 mb-4">
+                            <span class="bg-gray-100 px-2 py-0.5 rounded-full text-xs">React</span>
+                            <span class="bg-gray-100 px-2 py-0.5 rounded-full text-xs">Node.js</span>
+                            <span class="bg-gray-100 px-2 py-0.5 rounded-full text-xs">MongoDB</span>
+                            <span class="bg-gray-100 px-2 py-0.5 rounded-full text-xs">Jest</span>
+                        </div>
+                        <div class="flex gap-4 mt-auto">
+                            <a href="https://github.com/muskanpatel3/zerodha-clone" target="_blank"
+                                class="text-gray-600 font-semibold flex items-center gap-1 text-sm hover:text-purple-600 transition">
+                                <i data-lucide="github" class="w-3.5"></i> Repo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NestAway Rental - Card 2 (Internship) - Month & Year added -->
+                <div class="project-card group h-full flex flex-col">
+                    <div class="h-36 bg-gradient-to-r from-amber-500 to-orange-400 flex items-center justify-center">
+                        <i data-lucide="building" class="w-12 h-12 text-white opacity-80"></i>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start gap-2">
+                            <h3 class="text-xl font-bold">NestAway Rental</h3>
+                            <span
+                                class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full whitespace-nowrap">Jan-May
+                                2025</span>
+                        </div>
+                        <p class="text-gray-600 my-3 text-sm">MERN stack rental platform with JWT auth, Cloudinary, MVC
+                            architecture. 25% faster load, 99% uptime.</p>
+                        <div class="flex flex-wrap gap-1 mb-4">
+                            <span class="bg-gray-100 px-2 py-0.5 rounded-full text-xs">React</span>
+                            <span class="bg-gray-100 px-2 py-0.5 rounded-full text-xs">Node.js</span>
+                            <span class="bg-gray-100 px-2 py-0.5 rounded-full text-xs">MongoDB</span>
+                            <span class="bg-gray-100 px-2 py-0.5 rounded-full text-xs">JWT</span>
+                        </div>
+                        <div class="flex gap-4 mt-auto">
+                            <a href="https://github.com/muskanpatel3/NestAway-Project" target="_blank"
+                                class="text-gray-600 font-semibold flex items-center gap-1 text-sm hover:text-purple-600 transition">
+                                <i data-lucide="github" class="w-3.5"></i> Repo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real Estate System - Card 3 -->
+                <div class="project-card group h-full flex flex-col">
+                    <div class="h-36 bg-gradient-to-r from-blue-400 to-indigo-600 flex items-center justify-center">
+                        <i data-lucide="home" class="w-12 h-12 text-white opacity-80"></i>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start gap-2">
+                            <h3 class="text-xl font-bold">Real Estate System</h3>
+                            <span
+                                class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full whitespace-nowrap">Feb-May
+                                2024</span>
+                        </div>
+                        <p class="text-gray-600 my-3 text-sm">Node.js & MySQL web app, optimized queries → 12% faster
+                            response, 90% user satisfaction.</p>
+                        <div class="flex flex-wrap gap-1 mb-4">
+                            <span class="bg-gray-100 px-2 py-0.5 rounded-full text-xs">Node.js</span>
+                            <span class="bg-gray-100 px-2 py-0.5 rounded-full text-xs">MySQL</span>
+                            <span class="bg-gray-100 px-2 py-0.5 rounded-full text-xs">EJS</span>
+                            <span class="bg-gray-100 px-2 py-0.5 rounded-full text-xs">Bootstrap</span>
+                        </div>
+                        <div class="flex gap-4 mt-auto">
+                            <a href="https://github.com/muskanpatel3/real-estate-system" target="_blank"
+                                class="text-gray-600 font-semibold flex items-center gap-1 text-sm hover:text-purple-600 transition">
+                                <i data-lucide="github" class="w-3.5"></i> Repo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Extra project mention (optional - agar chahein to rakhein)
+    <div class="mt-6 bg-white p-4 rounded-xl border flex items-center gap-3 text-sm">
+        <i data-lucide="briefcase" class="w-5 h-5 text-purple-500 flex-shrink-0"></i>
+        <span><span class="font-semibold">Credit EDA Project (IIT Roorkee):</span> Python, Pandas, Matplotlib – 18% accuracy improvement</span>
+    </div> -->
+        </section>
+
+        <!-- EDUCATION + CERTIFICATIONS compact -->
+        <section id="education" class="bg-gray-50 py-16 px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="section-title">Education & Certifications</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="bg-white p-6 rounded-2xl border-l-4 border-purple-600"><span
+                                class="text-purple-700 font-bold">2023 – 2025</span>
+                            <h3 class="text-xl font-bold">Master of Computer Applications</h3>
+                            <p class="text-gray-600">Madhav Institute of Technology & Science, Gwalior</p>
+                        </div>
+                        <div class="bg-white p-6 mt-4 rounded-2xl border-l-4 border-blue-600"><span
+                                class="text-blue-700 font-bold">2020 – 2023</span>
+                            <h3 class="text-xl font-bold">B.Sc. Computer Maintenance</h3>
+                            <p class="text-gray-600">Govt. M.H. College, Jabalpur</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="bg-white p-6 rounded-2xl flex flex-wrap gap-3 items-start"><i data-lucide="award"
+                                class="w-8 h-8 text-yellow-500 flex-shrink-0"></i>
+                            <div><span class="font-bold block">JavaScript & React JS</span><span
+                                    class="text-sm text-gray-500">Coding Thinker Aug 2024</span></div>
+                        </div>
+                        <div class="bg-white p-6 mt-3 rounded-2xl flex gap-3"><i data-lucide="award"
+                                class="w-8 h-8 text-yellow-500"></i>
+                            <div><span class="font-bold">Data Science Certification</span><span
+                                    class="text-sm text-gray-500 block">E‑Cell IIT Roorkee May 2024</span></div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl flex flex-wrap gap-3 items-start"><i data-lucide="award"
+                                class="w-8 h-8 text-yellow-500 flex-shrink-0"></i>
+                            <div><span class="font-bold block">Deep Learning Fundamentals</span><span
+                                    class="text-sm text-gray-500">NVIDIA DLI Feb 2024</span></div>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl flex flex-wrap gap-3 items-start"><i data-lucide="award"
+                                class="w-8 h-8 text-yellow-500 flex-shrink-0"></i>
+                            <div><span class="font-bold block">NPTEL Programming</span><span
+                                    class="text-sm text-gray-500"> IIT Kharagpur Jan 2024</span></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT section with form & direct links -->
+        <section id="contact" class="max-w-6xl mx-auto px-4 py-20">
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6 heading-font">Let's connect</h2>
+                    <p class="text-gray-600 text-lg mb-8">Open for Software Developer / IT Support Engineer
+                        opportunities. </p>
+                    <div class="space-y-5">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-700">
+                                <i data-lucide="phone"></i>
+                            </div><a href="tel:+919302580044" class="hover:underline">+91-9302580044</a>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-700">
+                                <i data-lucide="mail"></i>
+                            </div><a href="mailto:muskanpatel03032003@gmail.com"
+                                class="hover:underline">muskanpatel03032003@gmail.com</a>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-700">
+                                <i data-lucide="linkedin"></i>
+                            </div><a href="https://linkedin.com/in/muskanpatel3"
+                                target="_blank">linkedin.com/in/muskanpatel3</a>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center"><i
+                                    data-lucide="github"></i></div><a href="https://github.com/muskanpatel3"
+                                target="_blank">github.com/muskanpatel3</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- contact form (mock) -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border">
+                    <h2>Let's Connect 🚀</h2>
+                    <p>Feel free to reach out for opportunities or collaboration.</p>
+
+                    <div class="contact-buttons">
+                        <a href="mailto:muskanpatel03032003@gmail.com" class="contact-btn">
+                            📧 Email Me
+                        </a>
+
+                        <a href="https://wa.me/919302580044" target="_blank" class="contact-btn">
+                            💬 Chat on WhatsApp
+                        </a>
+                    </div>
+                    <!-- <form id="contactForm" class="space-y-5">
+                        <div><label class="block font-medium mb-1">Name</label><input type="text"
+                                placeholder="Your name"
+                                class="w-full px-5 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-purple-300 outline-none"
+                                required></div>
+                        <div><label class="block font-medium mb-1">Email</label><input type="email"
+                                placeholder="you@example.com"
+                                class="w-full px-5 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-purple-300 outline-none"
+                                required></div>
+                        <div><label class="block font-medium mb-1">Message</label><textarea rows="4"
+                                placeholder="Your message..."
+                                class="w-full px-5 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-purple-300 outline-none"
+                                required></textarea></div>
+                        <button type="submit"
+                            class="btn-primary w-full justify-center py-4 text-lg flex items-center gap-2"><i
+                                data-lucide="send" class="w-5"></i>Send message</button>
+                    </form> -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-white py-12 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div><span
+                    class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Muskan
+                    Patel</span>
+                <p class="text-gray-400 text-sm mt-1">MCA · Developer · Researcher</p>
+            </div>
+            <div class="flex gap-7 text-sm"><a href="#home" class="hover:text-purple-300">Home</a><a href="#skills"
+                    class="hover:text-purple-300">Skills</a><a href="#projects"
+                    class="hover:text-purple-300">Projects</a><a href="#contact"
+                    class="hover:text-purple-300">Contact</a></div>
+            <div class="flex gap-4"><a href="https://linkedin.com/in/muskanpatel3" target="_blank"
+                    class="w-9 h-9 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-black"><i
+                        data-lucide="linkedin" class="w-5"></i></a><a href="https://github.com/muskanpatel3"
+                    target="_blank"
+                    class="w-9 h-9 rounded-full border border-gray-700 flex items-center justify-center hover:bg-white hover:text-black"><i
+                        data-lucide="github" class="w-5"></i></a></div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-8 pt-6 border-t border-gray-800 text-center text-gray-500 text-sm">© 2025
+            Muskan Patel – All rights reserved.</div>
+    </footer>
+
+    <!-- BACK TO TOP -->
+    <button id="back-to-top"
+        class="fixed bottom-6 right-6 bg-purple-700 text-white p-3 rounded-full shadow-xl z-50 hover:bg-purple-800 transition"><i
+            data-lucide="arrow-up" class="w-6 h-6"></i></button>
+
+    <!-- LUCIDE ICONS INIT -->
+    <script>lucide.createIcons();</script>
+
+    <script>
+        (function () {
+            // Mobile sidebar logic
+            const menuToggle = document.getElementById('menu-toggle');
+            const closeBtn = document.getElementById('close-menu');
+            const sidebar = document.getElementById('mobileSidebar');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            if (menuToggle) menuToggle.addEventListener('click', () => sidebar.classList.remove('hidden-menu'));
+            if (closeBtn) closeBtn.addEventListener('click', () => sidebar.classList.add('hidden-menu'));
+            mobileLinks.forEach(link => link.addEventListener('click', () => sidebar.classList.add('hidden-menu')));
+
+            // back to top button
+            const backBtn = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (document.documentElement.scrollTop > 500) backBtn.style.display = 'block';
+                else backBtn.style.display = 'none';
+            });
+            backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+            // Resume download simulation (alerts + open dummy pdf)
+            function handleDownload(e) {
+                e.preventDefault();
+                alert('✅ Resume download started (demo – you can replace with your actual PDF)');
+                // open a placeholder pdf (or just simulate)
+                window.open('#', '_blank'); // dummy
+            }
+            document.querySelectorAll('#download-resume, #mobile-resume, #resume-hero').forEach(btn => {
+                if (btn) btn.addEventListener('click', handleDownload);
+            });
+
+            // contact form mock
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    alert('✨ Thanks for reaching out! (demo, no message sent)');
+                    contactForm.reset();
+                });
+            }
+        })();
+    </script>
+</body>
+
+</html>
